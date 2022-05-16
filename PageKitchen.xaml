@@ -1,0 +1,83 @@
+﻿<Page x:Class="Application_Khinkalnaya.PageKitchen" Background=" #363534"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Application_Khinkalnaya"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="PageKitchen">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="100"></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="200"></ColumnDefinition>
+            <ColumnDefinition Width="247*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+
+        <StackPanel Grid.Column="0" Grid.RowSpan="2"  Background="#4F4E4D">
+            <TextBlock Text="Фильтрация" Margin="40 5 40 0" FontSize="20" Width="160"  Foreground="#D16B00"  FontWeight="Bold" ></TextBlock>
+            <StackPanel Orientation="Horizontal" Margin="0 5 0 0">
+                <TextBlock Text="Дата"  Margin="10 10 0 0" Width="40" FontSize="15" Foreground="#F0A444"  FontWeight="Bold"></TextBlock>
+                <DatePicker Name="DPData" Width="144" Height="30"  Margin="0 10 0 0" SelectedDateChanged="DatePicker_SelectedDateChanged" BorderBrush="#4F4E4D"></DatePicker>
+            </StackPanel>
+            <StackPanel  Orientation="Horizontal" Margin="0 5 0 0">
+                <TextBlock Text="Ответственный"  Margin="10 10 0 0" Width="110" FontSize="15" Foreground="#F0A444"  FontWeight="Bold"></TextBlock>
+                <ComboBox Name="CBRespon" SelectionChanged="CBRespon_SelectionChanged" Width="70"  Height="40"  Margin="4 5 0 0" FontWeight="Bold" Foreground="#F0A444"></ComboBox>
+            </StackPanel>
+            <StackPanel  Orientation="Horizontal" Margin="0 5 0 0">
+                <TextBlock Text="Поставщики"  Margin="10 10 0 0" Width="110" FontSize="15" Foreground="#F0A444"  FontWeight="Bold"></TextBlock>
+                <ComboBox Name="CBSup" SelectionChanged="CBSup_SelectionChanged" Width="70"  Height="40"  Margin="4 5 0 0" FontWeight="Bold" Foreground="#F0A444"></ComboBox>
+            </StackPanel>
+            <StackPanel  Orientation="Horizontal" Margin="0 5 0 0">
+                <TextBlock Text="Тип поставки"  Margin="10 10 0 0" Width="110" FontSize="15" Foreground="#F0A444"  FontWeight="Bold"></TextBlock>
+                <ComboBox Name="CBType" SelectionChanged="CBType_SelectionChanged" Width="70"  Height="40"  Margin="4 5 0 0" FontWeight="Bold" Foreground="#F0A444"></ComboBox>
+            </StackPanel>
+            
+            <StackPanel Margin="0 8">
+                <TextBlock Text="Сортировка" Margin="45 5 40 0" FontSize="20" Width="200" Foreground="#D16B00"  FontWeight="Bold"></TextBlock>
+                <StackPanel Orientation="Horizontal" Margin="0 5 0 0">
+                    <TextBlock Text="По дате:"  Margin="10 0 0 0" Width="70" FontSize="15" Foreground="#A15A0A"  FontWeight="Bold"></TextBlock>
+                </StackPanel>
+                <RadioButton Name="RBDataNew" Checked="RBDataNew_Checked" Content="Новое" FontSize="15"   Margin="10 10 0 0" Foreground="#F0A444"  FontWeight="Bold"></RadioButton>
+                <RadioButton Name="RBDataOld" Checked="RBDataOld_Checked" Content="Старое" FontSize="15"   Margin="10 10 0 0" Foreground="#F0A444"  FontWeight="Bold"></RadioButton>
+                <StackPanel Orientation="Horizontal" Margin="0 5 0 0">
+                    <TextBlock Text="По типу поставки:"  Margin="10 0 0 0" Width="140" FontSize="15" Foreground="#A15A0A"  FontWeight="Bold"></TextBlock>
+                </StackPanel>
+                <RadioButton Name="RBProd" Checked="RBProd_Checked" Content="Продукты" FontSize="15"   Margin="10 10 0 0" Foreground="#F0A444"  FontWeight="Bold"></RadioButton>
+                <RadioButton Name="RBStuff" Checked="RBStuff_Checked" Content="Принадлежности" FontSize="15"   Margin="10 10 0 0" Foreground="#F0A444"  FontWeight="Bold"></RadioButton>
+            </StackPanel>
+        </StackPanel>
+        <StackPanel Grid.Column="1" Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 0 10 0" Background="#363534">
+            <Button Content ="Кухня"  Width="90" Height="40"  Margin="10 25 0 0" HorizontalAlignment="Left"   Foreground="#F0A444"  FontWeight="Bold" Background="#363534" BorderBrush="#363534" FontSize="20"></Button>
+            <Button Content ="Бар"  Width="120" Height="40"  Margin="10 25 0 0" HorizontalAlignment="Left" Foreground="#F0A444" Click="Button_Click" FontWeight="Bold" Background="#363534"  BorderBrush="#363534" FontSize="20"></Button>
+            <Button Content ="Расходники"  Width="130" Height="40"  Margin="10 25 0 0" HorizontalAlignment="Left" Click="Button_Click_1"  Foreground="#F0A444"  FontWeight="Bold" Background="#363534"  BorderBrush="#363534" FontSize="20"></Button>
+            <Button Content ="Особое"  Width="130" Height="40"  Margin="10 25 0 0" HorizontalAlignment="Left" Click="Button_Click_2"  Foreground="#F0A444"  FontWeight="Bold" Background="#363534"  BorderBrush="#363534" FontSize="20"></Button>
+        </StackPanel>
+        <Border Grid.Column="1" Grid.Row="1" Background="White">
+            <Image Source="/img/hachapura.png" Width="130"/>
+        </Border>
+        <ListView Name="LVShow"  Margin="5 10"  Grid.Column="1" Grid.Row="2" Background="Transparent" BorderBrush="#F0A444" FontWeight="Bold" BorderThickness="4" >
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <StackPanel>
+                            <TextBlock Name="TBData" Text="{Binding Дата}"></TextBlock>
+                            <TextBlock Name="TBSup" Text="{Binding Поставщики.Имя_поставщика}"></TextBlock>
+                            <TextBlock Name="TBRespons" Text="{Binding ОтветственныйЗаПоставки.Имя_ответственного}"></TextBlock>
+                        </StackPanel>
+                        <TextBlock Name="TBType" Text="{Binding ТипПоставки.Название_типа}" Margin="20 0"></TextBlock>
+                        <StackPanel Margin="20 0">
+                            <TextBlock Text="Описание:"></TextBlock>
+                            <TextBlock Text="{Binding Описание}"></TextBlock>
+                        </StackPanel>
+                        <Button Name="Delete" Content="Удалить" Click="Delete_Click" Uid="{Binding ID_поставки}" Margin="40 0" Height="30" Background="#F0A444"></Button>
+                    </StackPanel>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </Grid>
+</Page>

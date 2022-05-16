@@ -1,0 +1,797 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Хранилище Model" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="ОсобыеПоставки">
+          <Key>
+            <PropertyRef Name="ID_поставки" />
+          </Key>
+          <Property Name="ID_поставки" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Тип_поставки" Type="int" Nullable="false" />
+          <Property Name="Поставщик" Type="int" Nullable="false" />
+          <Property Name="Описание" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Дата" Type="date" Nullable="false" />
+          <Property Name="Ответственный" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ОтветственныйЗаПоставки">
+          <Key>
+            <PropertyRef Name="ID_работника" />
+          </Key>
+          <Property Name="ID_работника" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Имя_ответственного" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Должность" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Телефон" Type="nvarchar" MaxLength="15" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ПоставкиДляБара">
+          <Key>
+            <PropertyRef Name="ID_поставки" />
+          </Key>
+          <Property Name="ID_поставки" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Тип_поставки" Type="int" Nullable="false" />
+          <Property Name="Поставщик" Type="int" Nullable="false" />
+          <Property Name="Описание" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Дата" Type="date" Nullable="false" />
+          <Property Name="Ответственный" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ПоставкиДляКухни">
+          <Key>
+            <PropertyRef Name="ID_поставки" />
+          </Key>
+          <Property Name="ID_поставки" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Тип_поставки" Type="int" Nullable="false" />
+          <Property Name="Поставщик" Type="int" Nullable="false" />
+          <Property Name="Описание" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Дата" Type="date" Nullable="false" />
+          <Property Name="Ответственный" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Поставщики">
+          <Key>
+            <PropertyRef Name="ID_поставщика" />
+          </Key>
+          <Property Name="ID_поставщика" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Имя_поставщика" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="Тип_поставщика" Type="int" Nullable="false" />
+          <Property Name="Контактное_лицо" Type="nvarchar" MaxLength="40" Nullable="false" />
+          <Property Name="Телефон" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Адрес_эл" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="РасходнаяУтварь">
+          <Key>
+            <PropertyRef Name="ID_поставки" />
+          </Key>
+          <Property Name="ID_поставки" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Тип_поставки" Type="int" Nullable="false" />
+          <Property Name="Поставщики" Type="int" Nullable="false" />
+          <Property Name="Описание" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Дата" Type="date" Nullable="false" />
+          <Property Name="Ответственный" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ТипПоставки">
+          <Key>
+            <PropertyRef Name="ID_типа" />
+          </Key>
+          <Property Name="ID_типа" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Название_типа" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ТипПоставщика">
+          <Key>
+            <PropertyRef Name="ID_поставщика" />
+          </Key>
+          <Property Name="ID_поставщика" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Тип_поставщика" Type="nvarchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_ОсобыеПоставки_ОтветственныйЗаПоставки">
+          <End Role="ОтветственныйЗаПоставки" Type="Self.ОтветственныйЗаПоставки" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ОсобыеПоставки" Type="Self.ОсобыеПоставки" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ОтветственныйЗаПоставки">
+              <PropertyRef Name="ID_работника" />
+            </Principal>
+            <Dependent Role="ОсобыеПоставки">
+              <PropertyRef Name="Ответственный" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ОсобыеПоставки_Поставщики">
+          <End Role="Поставщики" Type="Self.Поставщики" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ОсобыеПоставки" Type="Self.ОсобыеПоставки" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Поставщики">
+              <PropertyRef Name="ID_поставщика" />
+            </Principal>
+            <Dependent Role="ОсобыеПоставки">
+              <PropertyRef Name="Поставщик" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ОсобыеПоставки_ТипПоставки">
+          <End Role="ТипПоставки" Type="Self.ТипПоставки" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ОсобыеПоставки" Type="Self.ОсобыеПоставки" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ТипПоставки">
+              <PropertyRef Name="ID_типа" />
+            </Principal>
+            <Dependent Role="ОсобыеПоставки">
+              <PropertyRef Name="Тип_поставки" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ПоставкиДляБара_ОтветственныйЗаПоставки">
+          <End Role="ОтветственныйЗаПоставки" Type="Self.ОтветственныйЗаПоставки" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ПоставкиДляБара" Type="Self.ПоставкиДляБара" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ОтветственныйЗаПоставки">
+              <PropertyRef Name="ID_работника" />
+            </Principal>
+            <Dependent Role="ПоставкиДляБара">
+              <PropertyRef Name="Ответственный" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ПоставкиДляБара_Поставщики">
+          <End Role="Поставщики" Type="Self.Поставщики" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ПоставкиДляБара" Type="Self.ПоставкиДляБара" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Поставщики">
+              <PropertyRef Name="ID_поставщика" />
+            </Principal>
+            <Dependent Role="ПоставкиДляБара">
+              <PropertyRef Name="Поставщик" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ПоставкиДляБара_ТипПоставки">
+          <End Role="ТипПоставки" Type="Self.ТипПоставки" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ПоставкиДляБара" Type="Self.ПоставкиДляБара" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ТипПоставки">
+              <PropertyRef Name="ID_типа" />
+            </Principal>
+            <Dependent Role="ПоставкиДляБара">
+              <PropertyRef Name="Тип_поставки" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ПоставкиДляКухни_ОтветственныйЗаПоставки">
+          <End Role="ОтветственныйЗаПоставки" Type="Self.ОтветственныйЗаПоставки" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ПоставкиДляКухни" Type="Self.ПоставкиДляКухни" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ОтветственныйЗаПоставки">
+              <PropertyRef Name="ID_работника" />
+            </Principal>
+            <Dependent Role="ПоставкиДляКухни">
+              <PropertyRef Name="Ответственный" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ПоставкиДляКухни_Поставщики">
+          <End Role="Поставщики" Type="Self.Поставщики" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ПоставкиДляКухни" Type="Self.ПоставкиДляКухни" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Поставщики">
+              <PropertyRef Name="ID_поставщика" />
+            </Principal>
+            <Dependent Role="ПоставкиДляКухни">
+              <PropertyRef Name="Поставщик" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ПоставкиДляКухни_ТипПоставки">
+          <End Role="ТипПоставки" Type="Self.ТипПоставки" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ПоставкиДляКухни" Type="Self.ПоставкиДляКухни" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ТипПоставки">
+              <PropertyRef Name="ID_типа" />
+            </Principal>
+            <Dependent Role="ПоставкиДляКухни">
+              <PropertyRef Name="Тип_поставки" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Поставщики_ТипПоставщика">
+          <End Role="ТипПоставщика" Type="Self.ТипПоставщика" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Поставщики" Type="Self.Поставщики" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ТипПоставщика">
+              <PropertyRef Name="ID_поставщика" />
+            </Principal>
+            <Dependent Role="Поставщики">
+              <PropertyRef Name="Тип_поставщика" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_РасходнаяУтварь_ОтветственныйЗаПоставки">
+          <End Role="ОтветственныйЗаПоставки" Type="Self.ОтветственныйЗаПоставки" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="РасходнаяУтварь" Type="Self.РасходнаяУтварь" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ОтветственныйЗаПоставки">
+              <PropertyRef Name="ID_работника" />
+            </Principal>
+            <Dependent Role="РасходнаяУтварь">
+              <PropertyRef Name="Ответственный" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_РасходнаяУтварь_Поставщики">
+          <End Role="Поставщики" Type="Self.Поставщики" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="РасходнаяУтварь" Type="Self.РасходнаяУтварь" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Поставщики">
+              <PropertyRef Name="ID_поставщика" />
+            </Principal>
+            <Dependent Role="РасходнаяУтварь">
+              <PropertyRef Name="Поставщики" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_РасходнаяУтварь_ТипПоставки">
+          <End Role="ТипПоставки" Type="Self.ТипПоставки" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="РасходнаяУтварь" Type="Self.РасходнаяУтварь" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ТипПоставки">
+              <PropertyRef Name="ID_типа" />
+            </Principal>
+            <Dependent Role="РасходнаяУтварь">
+              <PropertyRef Name="Тип_поставки" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище ModelContainer">
+          <EntitySet Name="ОсобыеПоставки" EntityType="Self.ОсобыеПоставки" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ОтветственныйЗаПоставки" EntityType="Self.ОтветственныйЗаПоставки" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ПоставкиДляБара" EntityType="Self.ПоставкиДляБара" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ПоставкиДляКухни" EntityType="Self.ПоставкиДляКухни" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Поставщики" EntityType="Self.Поставщики" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="РасходнаяУтварь" EntityType="Self.РасходнаяУтварь" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ТипПоставки" EntityType="Self.ТипПоставки" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ТипПоставщика" EntityType="Self.ТипПоставщика" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_ОсобыеПоставки_ОтветственныйЗаПоставки" Association="Self.FK_ОсобыеПоставки_ОтветственныйЗаПоставки">
+            <End Role="ОтветственныйЗаПоставки" EntitySet="ОтветственныйЗаПоставки" />
+            <End Role="ОсобыеПоставки" EntitySet="ОсобыеПоставки" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ОсобыеПоставки_Поставщики" Association="Self.FK_ОсобыеПоставки_Поставщики">
+            <End Role="Поставщики" EntitySet="Поставщики" />
+            <End Role="ОсобыеПоставки" EntitySet="ОсобыеПоставки" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ОсобыеПоставки_ТипПоставки" Association="Self.FK_ОсобыеПоставки_ТипПоставки">
+            <End Role="ТипПоставки" EntitySet="ТипПоставки" />
+            <End Role="ОсобыеПоставки" EntitySet="ОсобыеПоставки" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ПоставкиДляБара_ОтветственныйЗаПоставки" Association="Self.FK_ПоставкиДляБара_ОтветственныйЗаПоставки">
+            <End Role="ОтветственныйЗаПоставки" EntitySet="ОтветственныйЗаПоставки" />
+            <End Role="ПоставкиДляБара" EntitySet="ПоставкиДляБара" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ПоставкиДляБара_Поставщики" Association="Self.FK_ПоставкиДляБара_Поставщики">
+            <End Role="Поставщики" EntitySet="Поставщики" />
+            <End Role="ПоставкиДляБара" EntitySet="ПоставкиДляБара" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ПоставкиДляБара_ТипПоставки" Association="Self.FK_ПоставкиДляБара_ТипПоставки">
+            <End Role="ТипПоставки" EntitySet="ТипПоставки" />
+            <End Role="ПоставкиДляБара" EntitySet="ПоставкиДляБара" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ПоставкиДляКухни_ОтветственныйЗаПоставки" Association="Self.FK_ПоставкиДляКухни_ОтветственныйЗаПоставки">
+            <End Role="ОтветственныйЗаПоставки" EntitySet="ОтветственныйЗаПоставки" />
+            <End Role="ПоставкиДляКухни" EntitySet="ПоставкиДляКухни" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ПоставкиДляКухни_Поставщики" Association="Self.FK_ПоставкиДляКухни_Поставщики">
+            <End Role="Поставщики" EntitySet="Поставщики" />
+            <End Role="ПоставкиДляКухни" EntitySet="ПоставкиДляКухни" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ПоставкиДляКухни_ТипПоставки" Association="Self.FK_ПоставкиДляКухни_ТипПоставки">
+            <End Role="ТипПоставки" EntitySet="ТипПоставки" />
+            <End Role="ПоставкиДляКухни" EntitySet="ПоставкиДляКухни" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Поставщики_ТипПоставщика" Association="Self.FK_Поставщики_ТипПоставщика">
+            <End Role="ТипПоставщика" EntitySet="ТипПоставщика" />
+            <End Role="Поставщики" EntitySet="Поставщики" />
+          </AssociationSet>
+          <AssociationSet Name="FK_РасходнаяУтварь_ОтветственныйЗаПоставки" Association="Self.FK_РасходнаяУтварь_ОтветственныйЗаПоставки">
+            <End Role="ОтветственныйЗаПоставки" EntitySet="ОтветственныйЗаПоставки" />
+            <End Role="РасходнаяУтварь" EntitySet="РасходнаяУтварь" />
+          </AssociationSet>
+          <AssociationSet Name="FK_РасходнаяУтварь_Поставщики" Association="Self.FK_РасходнаяУтварь_Поставщики">
+            <End Role="Поставщики" EntitySet="Поставщики" />
+            <End Role="РасходнаяУтварь" EntitySet="РасходнаяУтварь" />
+          </AssociationSet>
+          <AssociationSet Name="FK_РасходнаяУтварь_ТипПоставки" Association="Self.FK_РасходнаяУтварь_ТипПоставки">
+            <End Role="ТипПоставки" EntitySet="ТипПоставки" />
+            <End Role="РасходнаяУтварь" EntitySet="РасходнаяУтварь" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="BD" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="ОсобыеПоставки" EntityType="Model.ОсобыеПоставки" />
+          <EntitySet Name="ОтветственныйЗаПоставки" EntityType="Model.ОтветственныйЗаПоставки" />
+          <EntitySet Name="ПоставкиДляБара" EntityType="Model.ПоставкиДляБара" />
+          <EntitySet Name="ПоставкиДляКухни" EntityType="Model.ПоставкиДляКухни" />
+          <EntitySet Name="Поставщики" EntityType="Model.Поставщики" />
+          <EntitySet Name="РасходнаяУтварь" EntityType="Model.РасходнаяУтварь" />
+          <EntitySet Name="ТипПоставки" EntityType="Model.ТипПоставки" />
+          <EntitySet Name="ТипПоставщика" EntityType="Model.ТипПоставщика" />
+          <AssociationSet Name="FK_ОсобыеПоставки_ОтветственныйЗаПоставки" Association="Model.FK_ОсобыеПоставки_ОтветственныйЗаПоставки">
+            <End Role="ОтветственныйЗаПоставки" EntitySet="ОтветственныйЗаПоставки" />
+            <End Role="ОсобыеПоставки" EntitySet="ОсобыеПоставки" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ОсобыеПоставки_Поставщики" Association="Model.FK_ОсобыеПоставки_Поставщики">
+            <End Role="Поставщики" EntitySet="Поставщики" />
+            <End Role="ОсобыеПоставки" EntitySet="ОсобыеПоставки" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ОсобыеПоставки_ТипПоставки" Association="Model.FK_ОсобыеПоставки_ТипПоставки">
+            <End Role="ТипПоставки" EntitySet="ТипПоставки" />
+            <End Role="ОсобыеПоставки" EntitySet="ОсобыеПоставки" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ПоставкиДляБара_ОтветственныйЗаПоставки" Association="Model.FK_ПоставкиДляБара_ОтветственныйЗаПоставки">
+            <End Role="ОтветственныйЗаПоставки" EntitySet="ОтветственныйЗаПоставки" />
+            <End Role="ПоставкиДляБара" EntitySet="ПоставкиДляБара" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ПоставкиДляКухни_ОтветственныйЗаПоставки" Association="Model.FK_ПоставкиДляКухни_ОтветственныйЗаПоставки">
+            <End Role="ОтветственныйЗаПоставки" EntitySet="ОтветственныйЗаПоставки" />
+            <End Role="ПоставкиДляКухни" EntitySet="ПоставкиДляКухни" />
+          </AssociationSet>
+          <AssociationSet Name="FK_РасходнаяУтварь_ОтветственныйЗаПоставки" Association="Model.FK_РасходнаяУтварь_ОтветственныйЗаПоставки">
+            <End Role="ОтветственныйЗаПоставки" EntitySet="ОтветственныйЗаПоставки" />
+            <End Role="РасходнаяУтварь" EntitySet="РасходнаяУтварь" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ПоставкиДляБара_Поставщики" Association="Model.FK_ПоставкиДляБара_Поставщики">
+            <End Role="Поставщики" EntitySet="Поставщики" />
+            <End Role="ПоставкиДляБара" EntitySet="ПоставкиДляБара" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ПоставкиДляБара_ТипПоставки" Association="Model.FK_ПоставкиДляБара_ТипПоставки">
+            <End Role="ТипПоставки" EntitySet="ТипПоставки" />
+            <End Role="ПоставкиДляБара" EntitySet="ПоставкиДляБара" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ПоставкиДляКухни_Поставщики" Association="Model.FK_ПоставкиДляКухни_Поставщики">
+            <End Role="Поставщики" EntitySet="Поставщики" />
+            <End Role="ПоставкиДляКухни" EntitySet="ПоставкиДляКухни" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ПоставкиДляКухни_ТипПоставки" Association="Model.FK_ПоставкиДляКухни_ТипПоставки">
+            <End Role="ТипПоставки" EntitySet="ТипПоставки" />
+            <End Role="ПоставкиДляКухни" EntitySet="ПоставкиДляКухни" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Поставщики_ТипПоставщика" Association="Model.FK_Поставщики_ТипПоставщика">
+            <End Role="ТипПоставщика" EntitySet="ТипПоставщика" />
+            <End Role="Поставщики" EntitySet="Поставщики" />
+          </AssociationSet>
+          <AssociationSet Name="FK_РасходнаяУтварь_Поставщики" Association="Model.FK_РасходнаяУтварь_Поставщики">
+            <End Role="Поставщики" EntitySet="Поставщики" />
+            <End Role="РасходнаяУтварь" EntitySet="РасходнаяУтварь" />
+          </AssociationSet>
+          <AssociationSet Name="FK_РасходнаяУтварь_ТипПоставки" Association="Model.FK_РасходнаяУтварь_ТипПоставки">
+            <End Role="ТипПоставки" EntitySet="ТипПоставки" />
+            <End Role="РасходнаяУтварь" EntitySet="РасходнаяУтварь" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="ОсобыеПоставки">
+          <Key>
+            <PropertyRef Name="ID_поставки" />
+          </Key>
+          <Property Name="ID_поставки" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Тип_поставки" Type="Int32" Nullable="false" />
+          <Property Name="Поставщик" Type="Int32" Nullable="false" />
+          <Property Name="Описание" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Дата" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Ответственный" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="ОтветственныйЗаПоставки" Relationship="Model.FK_ОсобыеПоставки_ОтветственныйЗаПоставки" FromRole="ОсобыеПоставки" ToRole="ОтветственныйЗаПоставки" />
+          <NavigationProperty Name="Поставщики" Relationship="Model.FK_ОсобыеПоставки_Поставщики" FromRole="ОсобыеПоставки" ToRole="Поставщики" />
+          <NavigationProperty Name="ТипПоставки" Relationship="Model.FK_ОсобыеПоставки_ТипПоставки" FromRole="ОсобыеПоставки" ToRole="ТипПоставки" />
+        </EntityType>
+        <EntityType Name="ОтветственныйЗаПоставки">
+          <Key>
+            <PropertyRef Name="ID_работника" />
+          </Key>
+          <Property Name="ID_работника" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Имя_ответственного" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Должность" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Телефон" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="ОсобыеПоставки" Relationship="Model.FK_ОсобыеПоставки_ОтветственныйЗаПоставки" FromRole="ОтветственныйЗаПоставки" ToRole="ОсобыеПоставки" />
+          <NavigationProperty Name="ПоставкиДляБара" Relationship="Model.FK_ПоставкиДляБара_ОтветственныйЗаПоставки" FromRole="ОтветственныйЗаПоставки" ToRole="ПоставкиДляБара" />
+          <NavigationProperty Name="ПоставкиДляКухни" Relationship="Model.FK_ПоставкиДляКухни_ОтветственныйЗаПоставки" FromRole="ОтветственныйЗаПоставки" ToRole="ПоставкиДляКухни" />
+          <NavigationProperty Name="РасходнаяУтварь" Relationship="Model.FK_РасходнаяУтварь_ОтветственныйЗаПоставки" FromRole="ОтветственныйЗаПоставки" ToRole="РасходнаяУтварь" />
+        </EntityType>
+        <EntityType Name="ПоставкиДляБара">
+          <Key>
+            <PropertyRef Name="ID_поставки" />
+          </Key>
+          <Property Name="ID_поставки" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Тип_поставки" Type="Int32" Nullable="false" />
+          <Property Name="Поставщик" Type="Int32" Nullable="false" />
+          <Property Name="Описание" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Дата" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Ответственный" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="ОтветственныйЗаПоставки" Relationship="Model.FK_ПоставкиДляБара_ОтветственныйЗаПоставки" FromRole="ПоставкиДляБара" ToRole="ОтветственныйЗаПоставки" />
+          <NavigationProperty Name="Поставщики" Relationship="Model.FK_ПоставкиДляБара_Поставщики" FromRole="ПоставкиДляБара" ToRole="Поставщики" />
+          <NavigationProperty Name="ТипПоставки" Relationship="Model.FK_ПоставкиДляБара_ТипПоставки" FromRole="ПоставкиДляБара" ToRole="ТипПоставки" />
+        </EntityType>
+        <EntityType Name="ПоставкиДляКухни">
+          <Key>
+            <PropertyRef Name="ID_поставки" />
+          </Key>
+          <Property Name="ID_поставки" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Тип_поставки" Type="Int32" Nullable="false" />
+          <Property Name="Поставщик" Type="Int32" Nullable="false" />
+          <Property Name="Описание" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Дата" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Ответственный" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="ОтветственныйЗаПоставки" Relationship="Model.FK_ПоставкиДляКухни_ОтветственныйЗаПоставки" FromRole="ПоставкиДляКухни" ToRole="ОтветственныйЗаПоставки" />
+          <NavigationProperty Name="Поставщики" Relationship="Model.FK_ПоставкиДляКухни_Поставщики" FromRole="ПоставкиДляКухни" ToRole="Поставщики" />
+          <NavigationProperty Name="ТипПоставки" Relationship="Model.FK_ПоставкиДляКухни_ТипПоставки" FromRole="ПоставкиДляКухни" ToRole="ТипПоставки" />
+        </EntityType>
+        <EntityType Name="Поставщики">
+          <Key>
+            <PropertyRef Name="ID_поставщика" />
+          </Key>
+          <Property Name="ID_поставщика" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Имя_поставщика" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="Тип_поставщика" Type="Int32" Nullable="false" />
+          <Property Name="Контактное_лицо" Type="String" Nullable="false" MaxLength="40" FixedLength="false" Unicode="true" />
+          <Property Name="Телефон" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Адрес_эл" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="ОсобыеПоставки" Relationship="Model.FK_ОсобыеПоставки_Поставщики" FromRole="Поставщики" ToRole="ОсобыеПоставки" />
+          <NavigationProperty Name="ПоставкиДляБара" Relationship="Model.FK_ПоставкиДляБара_Поставщики" FromRole="Поставщики" ToRole="ПоставкиДляБара" />
+          <NavigationProperty Name="ПоставкиДляКухни" Relationship="Model.FK_ПоставкиДляКухни_Поставщики" FromRole="Поставщики" ToRole="ПоставкиДляКухни" />
+          <NavigationProperty Name="ТипПоставщика" Relationship="Model.FK_Поставщики_ТипПоставщика" FromRole="Поставщики" ToRole="ТипПоставщика" />
+          <NavigationProperty Name="РасходнаяУтварь" Relationship="Model.FK_РасходнаяУтварь_Поставщики" FromRole="Поставщики" ToRole="РасходнаяУтварь" />
+        </EntityType>
+        <EntityType Name="РасходнаяУтварь">
+          <Key>
+            <PropertyRef Name="ID_поставки" />
+          </Key>
+          <Property Name="ID_поставки" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Тип_поставки" Type="Int32" Nullable="false" />
+          <Property Name="Поставщики" Type="Int32" Nullable="false" />
+          <Property Name="Описание" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Дата" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Ответственный" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="ОтветственныйЗаПоставки" Relationship="Model.FK_РасходнаяУтварь_ОтветственныйЗаПоставки" FromRole="РасходнаяУтварь" ToRole="ОтветственныйЗаПоставки" />
+          <NavigationProperty Name="Поставщики1" Relationship="Model.FK_РасходнаяУтварь_Поставщики" FromRole="РасходнаяУтварь" ToRole="Поставщики" />
+          <NavigationProperty Name="ТипПоставки" Relationship="Model.FK_РасходнаяУтварь_ТипПоставки" FromRole="РасходнаяУтварь" ToRole="ТипПоставки" />
+        </EntityType>
+        <EntityType Name="ТипПоставки">
+          <Key>
+            <PropertyRef Name="ID_типа" />
+          </Key>
+          <Property Name="ID_типа" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Название_типа" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="ОсобыеПоставки" Relationship="Model.FK_ОсобыеПоставки_ТипПоставки" FromRole="ТипПоставки" ToRole="ОсобыеПоставки" />
+          <NavigationProperty Name="ПоставкиДляБара" Relationship="Model.FK_ПоставкиДляБара_ТипПоставки" FromRole="ТипПоставки" ToRole="ПоставкиДляБара" />
+          <NavigationProperty Name="ПоставкиДляКухни" Relationship="Model.FK_ПоставкиДляКухни_ТипПоставки" FromRole="ТипПоставки" ToRole="ПоставкиДляКухни" />
+          <NavigationProperty Name="РасходнаяУтварь" Relationship="Model.FK_РасходнаяУтварь_ТипПоставки" FromRole="ТипПоставки" ToRole="РасходнаяУтварь" />
+        </EntityType>
+        <EntityType Name="ТипПоставщика">
+          <Key>
+            <PropertyRef Name="ID_поставщика" />
+          </Key>
+          <Property Name="ID_поставщика" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Тип_поставщика" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Поставщики" Relationship="Model.FK_Поставщики_ТипПоставщика" FromRole="ТипПоставщика" ToRole="Поставщики" />
+        </EntityType>
+        <Association Name="FK_ОсобыеПоставки_ОтветственныйЗаПоставки">
+          <End Type="Model.ОтветственныйЗаПоставки" Role="ОтветственныйЗаПоставки" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="Model.ОсобыеПоставки" Role="ОсобыеПоставки" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ОтветственныйЗаПоставки">
+              <PropertyRef Name="ID_работника" />
+            </Principal>
+            <Dependent Role="ОсобыеПоставки">
+              <PropertyRef Name="Ответственный" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ОсобыеПоставки_Поставщики">
+          <End Type="Model.Поставщики" Role="Поставщики" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="Model.ОсобыеПоставки" Role="ОсобыеПоставки" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Поставщики">
+              <PropertyRef Name="ID_поставщика" />
+            </Principal>
+            <Dependent Role="ОсобыеПоставки">
+              <PropertyRef Name="Поставщик" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ОсобыеПоставки_ТипПоставки">
+          <End Type="Model.ТипПоставки" Role="ТипПоставки" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="Model.ОсобыеПоставки" Role="ОсобыеПоставки" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ТипПоставки">
+              <PropertyRef Name="ID_типа" />
+            </Principal>
+            <Dependent Role="ОсобыеПоставки">
+              <PropertyRef Name="Тип_поставки" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ПоставкиДляБара_ОтветственныйЗаПоставки">
+          <End Type="Model.ОтветственныйЗаПоставки" Role="ОтветственныйЗаПоставки" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="Model.ПоставкиДляБара" Role="ПоставкиДляБара" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ОтветственныйЗаПоставки">
+              <PropertyRef Name="ID_работника" />
+            </Principal>
+            <Dependent Role="ПоставкиДляБара">
+              <PropertyRef Name="Ответственный" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ПоставкиДляКухни_ОтветственныйЗаПоставки">
+          <End Type="Model.ОтветственныйЗаПоставки" Role="ОтветственныйЗаПоставки" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="Model.ПоставкиДляКухни" Role="ПоставкиДляКухни" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ОтветственныйЗаПоставки">
+              <PropertyRef Name="ID_работника" />
+            </Principal>
+            <Dependent Role="ПоставкиДляКухни">
+              <PropertyRef Name="Ответственный" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_РасходнаяУтварь_ОтветственныйЗаПоставки">
+          <End Type="Model.ОтветственныйЗаПоставки" Role="ОтветственныйЗаПоставки" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="Model.РасходнаяУтварь" Role="РасходнаяУтварь" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ОтветственныйЗаПоставки">
+              <PropertyRef Name="ID_работника" />
+            </Principal>
+            <Dependent Role="РасходнаяУтварь">
+              <PropertyRef Name="Ответственный" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ПоставкиДляБара_Поставщики">
+          <End Type="Model.Поставщики" Role="Поставщики" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="Model.ПоставкиДляБара" Role="ПоставкиДляБара" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Поставщики">
+              <PropertyRef Name="ID_поставщика" />
+            </Principal>
+            <Dependent Role="ПоставкиДляБара">
+              <PropertyRef Name="Поставщик" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ПоставкиДляБара_ТипПоставки">
+          <End Type="Model.ТипПоставки" Role="ТипПоставки" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="Model.ПоставкиДляБара" Role="ПоставкиДляБара" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ТипПоставки">
+              <PropertyRef Name="ID_типа" />
+            </Principal>
+            <Dependent Role="ПоставкиДляБара">
+              <PropertyRef Name="Тип_поставки" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ПоставкиДляКухни_Поставщики">
+          <End Type="Model.Поставщики" Role="Поставщики" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="Model.ПоставкиДляКухни" Role="ПоставкиДляКухни" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Поставщики">
+              <PropertyRef Name="ID_поставщика" />
+            </Principal>
+            <Dependent Role="ПоставкиДляКухни">
+              <PropertyRef Name="Поставщик" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ПоставкиДляКухни_ТипПоставки">
+          <End Type="Model.ТипПоставки" Role="ТипПоставки" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="Model.ПоставкиДляКухни" Role="ПоставкиДляКухни" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ТипПоставки">
+              <PropertyRef Name="ID_типа" />
+            </Principal>
+            <Dependent Role="ПоставкиДляКухни">
+              <PropertyRef Name="Тип_поставки" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Поставщики_ТипПоставщика">
+          <End Type="Model.ТипПоставщика" Role="ТипПоставщика" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="Model.Поставщики" Role="Поставщики" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ТипПоставщика">
+              <PropertyRef Name="ID_поставщика" />
+            </Principal>
+            <Dependent Role="Поставщики">
+              <PropertyRef Name="Тип_поставщика" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_РасходнаяУтварь_Поставщики">
+          <End Type="Model.Поставщики" Role="Поставщики" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="Model.РасходнаяУтварь" Role="РасходнаяУтварь" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Поставщики">
+              <PropertyRef Name="ID_поставщика" />
+            </Principal>
+            <Dependent Role="РасходнаяУтварь">
+              <PropertyRef Name="Поставщики" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_РасходнаяУтварь_ТипПоставки">
+          <End Type="Model.ТипПоставки" Role="ТипПоставки" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="Model.РасходнаяУтварь" Role="РасходнаяУтварь" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ТипПоставки">
+              <PropertyRef Name="ID_типа" />
+            </Principal>
+            <Dependent Role="РасходнаяУтварь">
+              <PropertyRef Name="Тип_поставки" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище ModelContainer" CdmEntityContainer="BD">
+          <EntitySetMapping Name="ОсобыеПоставки">
+            <EntityTypeMapping TypeName="Model.ОсобыеПоставки">
+              <MappingFragment StoreEntitySet="ОсобыеПоставки">
+                <ScalarProperty Name="Ответственный" ColumnName="Ответственный" />
+                <ScalarProperty Name="Дата" ColumnName="Дата" />
+                <ScalarProperty Name="Описание" ColumnName="Описание" />
+                <ScalarProperty Name="Поставщик" ColumnName="Поставщик" />
+                <ScalarProperty Name="Тип_поставки" ColumnName="Тип_поставки" />
+                <ScalarProperty Name="ID_поставки" ColumnName="ID_поставки" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ОтветственныйЗаПоставки">
+            <EntityTypeMapping TypeName="Model.ОтветственныйЗаПоставки">
+              <MappingFragment StoreEntitySet="ОтветственныйЗаПоставки">
+                <ScalarProperty Name="Телефон" ColumnName="Телефон" />
+                <ScalarProperty Name="Должность" ColumnName="Должность" />
+                <ScalarProperty Name="Имя_ответственного" ColumnName="Имя_ответственного" />
+                <ScalarProperty Name="ID_работника" ColumnName="ID_работника" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ПоставкиДляБара">
+            <EntityTypeMapping TypeName="Model.ПоставкиДляБара">
+              <MappingFragment StoreEntitySet="ПоставкиДляБара">
+                <ScalarProperty Name="Ответственный" ColumnName="Ответственный" />
+                <ScalarProperty Name="Дата" ColumnName="Дата" />
+                <ScalarProperty Name="Описание" ColumnName="Описание" />
+                <ScalarProperty Name="Поставщик" ColumnName="Поставщик" />
+                <ScalarProperty Name="Тип_поставки" ColumnName="Тип_поставки" />
+                <ScalarProperty Name="ID_поставки" ColumnName="ID_поставки" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ПоставкиДляКухни">
+            <EntityTypeMapping TypeName="Model.ПоставкиДляКухни">
+              <MappingFragment StoreEntitySet="ПоставкиДляКухни">
+                <ScalarProperty Name="Ответственный" ColumnName="Ответственный" />
+                <ScalarProperty Name="Дата" ColumnName="Дата" />
+                <ScalarProperty Name="Описание" ColumnName="Описание" />
+                <ScalarProperty Name="Поставщик" ColumnName="Поставщик" />
+                <ScalarProperty Name="Тип_поставки" ColumnName="Тип_поставки" />
+                <ScalarProperty Name="ID_поставки" ColumnName="ID_поставки" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Поставщики">
+            <EntityTypeMapping TypeName="Model.Поставщики">
+              <MappingFragment StoreEntitySet="Поставщики">
+                <ScalarProperty Name="Адрес_эл" ColumnName="Адрес_эл" />
+                <ScalarProperty Name="Телефон" ColumnName="Телефон" />
+                <ScalarProperty Name="Контактное_лицо" ColumnName="Контактное_лицо" />
+                <ScalarProperty Name="Тип_поставщика" ColumnName="Тип_поставщика" />
+                <ScalarProperty Name="Имя_поставщика" ColumnName="Имя_поставщика" />
+                <ScalarProperty Name="ID_поставщика" ColumnName="ID_поставщика" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="РасходнаяУтварь">
+            <EntityTypeMapping TypeName="Model.РасходнаяУтварь">
+              <MappingFragment StoreEntitySet="РасходнаяУтварь">
+                <ScalarProperty Name="Ответственный" ColumnName="Ответственный" />
+                <ScalarProperty Name="Дата" ColumnName="Дата" />
+                <ScalarProperty Name="Описание" ColumnName="Описание" />
+                <ScalarProperty Name="Поставщики" ColumnName="Поставщики" />
+                <ScalarProperty Name="Тип_поставки" ColumnName="Тип_поставки" />
+                <ScalarProperty Name="ID_поставки" ColumnName="ID_поставки" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ТипПоставки">
+            <EntityTypeMapping TypeName="Model.ТипПоставки">
+              <MappingFragment StoreEntitySet="ТипПоставки">
+                <ScalarProperty Name="Название_типа" ColumnName="Название_типа" />
+                <ScalarProperty Name="ID_типа" ColumnName="ID_типа" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ТипПоставщика">
+            <EntityTypeMapping TypeName="Model.ТипПоставщика">
+              <MappingFragment StoreEntitySet="ТипПоставщика">
+                <ScalarProperty Name="Тип_поставщика" ColumnName="Тип_поставщика" />
+                <ScalarProperty Name="ID_поставщика" ColumnName="ID_поставщика" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
