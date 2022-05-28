@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Application_Khinkalnaya"
         mc:Ignorable="d"
-        Title="Рестран 'Хинкальная' Добавление" Height="440" Width="380"  Icon="/img/hachapura.png" >
+        Title="Рестран 'Хинкальная' Добавление" Height="435" Width="380"  Icon="/img/hachapura.png" >
     <Grid>
         <StackPanel  Background="#363534" >
             <StackPanel Orientation="Horizontal" Background="#363534">
@@ -23,7 +23,7 @@
                 <RadioButton Name="RBStuff" Content="Пренадлежности" Margin="20 5 40 0" Foreground="#F0A444"  FontWeight="Bold"  FontSize="13"></RadioButton>
                 <StackPanel Orientation="Horizontal" Background="#363534">
                     <TextBlock Text="Поставщик :" Margin="20 5 40 0"  Foreground="#B65A0A"  FontWeight="ExtraBold"  FontSize="13"></TextBlock>
-                    <ComboBox Name="CBSup" Width="160" Height="20" HorizontalAlignment="Left" Margin="50 5 40 0"  Foreground="#F0A444" FontWeight="Bold"></ComboBox>
+                    <ComboBox Name="CBSup" Width="160" Height="20" HorizontalAlignment="Left" Margin="50 5 40 0"  Foreground="#F0A444" FontWeight="Bold" Background="#F5E4AB"></ComboBox>
                 </StackPanel>
                 <TextBlock Text="Описание :"  Margin="20 5 40 0"  Foreground="#B65A0A"  FontWeight="ExtraBold"  FontSize="13"></TextBlock>
                 <TextBox Name="TBDescription" Width="160" Height="80" Margin="20 5 40 0"  HorizontalAlignment="Left" TextWrapping="Wrap" BorderBrush="#F0A444" FontWeight="Bold" Foreground="#F0A444"  > </TextBox>

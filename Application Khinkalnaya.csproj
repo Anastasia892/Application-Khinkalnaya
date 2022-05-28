@@ -87,6 +87,15 @@
     <Compile Include="PageKitchen.xaml.cs">
       <DependentUpon>PageKitchen.xaml</DependentUpon>
     </Compile>
+    <Compile Include="PageManualAdd.xaml.cs">
+      <DependentUpon>PageManualAdd.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PageManualFilt.xaml.cs">
+      <DependentUpon>PageManualFilt.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PageManualRec.xaml.cs">
+      <DependentUpon>PageManualRec.xaml</DependentUpon>
+    </Compile>
     <Compile Include="PageSpeacial.xaml.cs">
       <DependentUpon>PageSpeacial.xaml</DependentUpon>
     </Compile>
@@ -95,6 +104,9 @@
     </Compile>
     <Compile Include="WindowList.xaml.cs">
       <DependentUpon>WindowList.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="WinManual.xaml.cs">
+      <DependentUpon>WinManual.xaml</DependentUpon>
     </Compile>
     <Compile Include="ОсобыеПоставки.cs">
       <DependentUpon>Model.tt</DependentUpon>
@@ -140,6 +152,18 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="PageManualAdd.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="PageManualFilt.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="PageManualRec.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="PageSpeacial.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -149,6 +173,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="WindowList.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="WinManual.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

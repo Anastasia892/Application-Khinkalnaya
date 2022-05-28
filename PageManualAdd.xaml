@@ -1,0 +1,45 @@
+﻿<Page x:Class="Application_Khinkalnaya.PageManualAdd"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Application_Khinkalnaya"
+      mc:Ignorable="d" 
+      d:DesignHeight="280" d:DesignWidth="600"
+      Title="PageManualAdd">
+
+    <Grid Background="#F5E4AB">
+            <ScrollViewer>
+        <StackPanel>
+                
+           
+        <TextBlock TextAlignment="Center" TextWrapping="Wrap" Width="500" Text="Окно добавления" HorizontalAlignment="Center"  Foreground="#D16B00" FontSize="15"   FontWeight="ExtraBold" Margin="15" ></TextBlock>
+        <TextBlock TextAlignment="Left" TextWrapping="Wrap" Width="500" Text="Для того, чтобы добавить новую запись в базу данных, нужно заполнить последующие поля для ввода." HorizontalAlignment="Center" ></TextBlock>
+            <TextBlock  TextAlignment="Left" TextWrapping="Wrap" Width="500" Text= "Выбор таблицы:"  Foreground="#D16B00" FontSize="13"   FontWeight="Bold"> </TextBlock>
+            <TextBlock TextAlignment="Left" TextWrapping="Wrap" Width="500" Text="Для выбора правильной таблицы нужно понять для какой сферы нужна эта поставка. " ></TextBlock>
+            <TextBlock TextAlignment="Left" TextWrapping="Wrap" Width="500" Text="Если нужно заказать продукты или оборудование, для кухни, выбрать нужно таблицу «Кухня»." ></TextBlock>
+            <TextBlock TextAlignment="Left" TextWrapping="Wrap" Width="500" Text="Если нужно заказать ингредиенты, напитки или оборудование для бара, выбрать нужно таблицу «Бар»." ></TextBlock>
+            <TextBlock TextAlignment="Left" TextWrapping="Wrap" Width="500" Text="Если нужно заказать утварь для гостевого зала, например, вилки, зубочистки, салфетки и т.д. выбрать нужно таблицу «Принадлежности»." ></TextBlock>
+            <TextBlock TextAlignment="Left" TextWrapping="Wrap" Width="500" Text="При заказе не вписывающиеся не в одну из других таблиц, можно выбрать таблицу «Особое». Например, при поломке стола, вносить поставку нужно именно в сюда." ></TextBlock>
+            <TextBlock  TextAlignment="Left" TextWrapping="Wrap" Width="500" Text= "Тип поставки:"  Foreground="#D16B00" FontSize="13"   FontWeight="Bold"></TextBlock>
+            <TextBlock TextAlignment="Left" TextWrapping="Wrap" Width="500" Text="Здесь нужно отметить, к чему поставка относится. При заказе пищевых продуктов, необходимо выбрать тип поставки – «Продукты». При заказе расточников, рабочих инструментов и мебели, то это тип поставки – «Принадлежности»." ></TextBlock>
+            <TextBlock  TextAlignment="Left" TextWrapping="Wrap" Width="500" Text= "Поставщик:"  Foreground="#D16B00" FontSize="13"   FontWeight="Bold"></TextBlock>
+            <TextBlock TextAlignment="Left" TextWrapping="Wrap" Width="500" Text="Есть несколько компаний сотрудничающих с ООО «Эстрада» Ресторан «Хинкальная»." ></TextBlock>
+            <TextBlock TextAlignment="Left" TextWrapping="Wrap" Width="500" Text="ООО «Продуктовая компания» - поставляет ресторану основные продукты, преимущественно для кухни." ></TextBlock>
+            <TextBlock TextAlignment="Left" TextWrapping="Wrap" Width="500" Text="ИП «Алкогольная поставка» - поставляет ресторану спиртные напитки, а также некоторые ингредиенты для бара." ></TextBlock>
+            <TextBlock TextAlignment="Left" TextWrapping="Wrap" Width="500" Text="ОАО «Ресторанная утварь» - поставляет ресторану мелкую утварь для гостевого зала." ></TextBlock>
+            <TextBlock TextAlignment="Left" TextWrapping="Wrap" Width="500" Text="ООО «Линия продуктов» - поставляет ресторану менее распространенные на рынке продукты." ></TextBlock>
+            <TextBlock TextAlignment="Left" TextWrapping="Wrap" Width="500" Text="ОАО «Любава» - занимается поставкой мебели и технического оборудования в сфере ресторанного бизнеса." ></TextBlock>
+            <TextBlock  TextAlignment="Left" TextWrapping="Wrap" Width="500" Text= "Описание:"  Foreground="#D16B00" FontSize="13"   FontWeight="Bold"></TextBlock>
+            <TextBlock TextAlignment="Left" TextWrapping="Wrap" Width="500" Text="Тут вносятся данные о запрашиваемой поставки, расписывается количество, брэнд, и все то, что бы помогло для корректной поставки. " ></TextBlock>
+            <TextBlock  TextAlignment="Left" TextWrapping="Wrap" Width="500" Text= "Дата:"  Foreground="#D16B00" FontSize="13"   FontWeight="Bold"></TextBlock>
+            <TextBlock TextAlignment="Left" TextWrapping="Wrap" Width="500" Text="Вносится дата, о совершении запросе на новую поставку." ></TextBlock>
+            <TextBlock  TextAlignment="Left" TextWrapping="Wrap" Width="500" Text= "Ответственный:"  Foreground="#D16B00" FontSize="13"   FontWeight="Bold"></TextBlock>
+            <TextBlock TextAlignment="Left" TextWrapping="Wrap" Width="500" Text="Из перечня внесенных имен, сотрудник должен выбрать того, кто ответственен за внесение новых данных в БД." ></TextBlock>
+            <TextBlock  TextAlignment="Left" TextWrapping="Wrap" Width="500" Text= "Кнопка «Добавить» и «Записи»:"  Foreground="#D16B00" FontSize="13"   FontWeight="Bold"></TextBlock>
+            <TextBlock TextAlignment="Left" TextWrapping="Wrap" Width="500" Text="Кнопка «Добавить» - добавляет новые введенные данные в БД." ></TextBlock>
+            <TextBlock TextAlignment="Left" TextWrapping="Wrap" Width="500" Text="Кнопка «Записи» - переходит сразу к записям в БД, без добавления новой." ></TextBlock>
+        </StackPanel>
+        </ScrollViewer>
+    </Grid>
+</Page>

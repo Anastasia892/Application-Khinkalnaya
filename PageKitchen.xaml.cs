@@ -164,5 +164,12 @@ namespace Application_Khinkalnaya
             }
             FrameClass.frame.Navigate(new PageKitchen());
         }
+
+        private void Button_Click_3(object sender, RoutedEventArgs e)
+        {
+            WinManual manual = new WinManual();
+            manual.ShowDialog();
+        }
     }
+    
 }

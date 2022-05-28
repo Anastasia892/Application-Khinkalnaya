@@ -51,12 +51,13 @@
             </StackPanel>
         </StackPanel>
         <StackPanel Grid.Column="1" Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 0 10 0" Background="#363534">
-            <Button Content ="Кухня"  Width="90" Height="40"  Margin="10 25 0 0" HorizontalAlignment="Left" Click="Button_Click"  Foreground="#F0A444"  FontWeight="Bold" Background="#363534" BorderBrush="#363534" FontSize="20"></Button>
-            <Button Content ="Бар"  Width="120" Height="40"  Margin="10 25 0 0" HorizontalAlignment="Left" Foreground="#F0A444"  FontWeight="Bold" Background="#363534"  BorderBrush="#363534" FontSize="20" Click="Button_Click_1"></Button>
-            <Button Content ="Расходники"  Width="130" Height="40"  Margin="10 25 0 0" HorizontalAlignment="Left"  Foreground="#F0A444"  FontWeight="Bold" Background="#363534"  BorderBrush="#363534" FontSize="20"></Button>
-            <Button Content ="Особое"  Width="130" Height="40"  Margin="10 25 0 0" HorizontalAlignment="Left" Click="Button_Click_2"  Foreground="#F0A444"  FontWeight="Bold" Background="#363534"  BorderBrush="#363534" FontSize="20"></Button>
+            <Button Content ="Кухня"  Width="90" Height="40"  Margin="18 25 0 0" HorizontalAlignment="Left" Click="Button_Click"  Foreground="#F0A444"  FontWeight="Bold" Background="#363534" BorderBrush="#363534" FontSize="20"></Button>
+            <Button Content ="Бар"  Width="70" Height="40"  Margin="5 25 0 0" HorizontalAlignment="Left" Foreground="#F0A444"  FontWeight="Bold" Background="#363534"  BorderBrush="#363534" FontSize="20"></Button>
+            <Button Content ="Расходники"  Width="130" Height="40"  Margin="0 25 0 0" HorizontalAlignment="Left" Click="Button_Click_1"  Foreground="#F0A444"  FontWeight="Bold" Background="#363534"  BorderBrush="#363534" FontSize="20"></Button>
+            <Button Content ="Особое"  Width="110" Height="40"  Margin="0 25 0 0" HorizontalAlignment="Left" Click="Button_Click_2"  Foreground="#F0A444"  FontWeight="Bold" Background="#363534"  BorderBrush="#363534" FontSize="20"></Button>
+            <Button  Content ="Справка"  Width="100" Height="40"  Margin="0 25 0 0" HorizontalAlignment="Left" Click="Button_Click_3"  Foreground="#F0A444"  FontWeight="Bold" Background="#363534"  BorderBrush="#363534" FontSize="20" ></Button>
         </StackPanel>
-        <Border Grid.Column="1" Grid.Row="1" Background="White">
+        <Border Grid.Column="1" Grid.Row="1" Background="#F5E4AB">
             <Image Source="/img/hachapura.png" Width="130"/>
         </Border>
         <ListView Name="LVShow"  Margin="5 10"  Grid.Column="1" Grid.Row="2" Background="Transparent"  BorderBrush="#F0A444" FontWeight="Bold" BorderThickness="4">

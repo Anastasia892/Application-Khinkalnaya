@@ -15,11 +15,11 @@
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="200"></ColumnDefinition>
-            <ColumnDefinition Width="247*"></ColumnDefinition>
+            <ColumnDefinition ></ColumnDefinition>
         </Grid.ColumnDefinitions>
 
         <StackPanel Grid.Column="0" Grid.RowSpan="2"  Background="#4F4E4D">
-            <TextBlock Text="Фильтрация" Margin="40 5 40 0" FontSize="20" Width="160"  Foreground="#D16B00"  FontWeight="Bold" ></TextBlock>
+            <TextBlock Text="Фильтрация" Margin="40 5 40 0" FontSize="20" Width="160"  Foreground="#D16B00"  FontWeight="Bold"  ></TextBlock>
             <StackPanel Orientation="Horizontal" Margin="0 5 0 0">
                 <TextBlock Text="Дата"  Margin="10 10 0 0" Width="40" FontSize="15" Foreground="#F0A444"  FontWeight="Bold"></TextBlock>
                 <DatePicker Name="DPData" Width="144" Height="30"  Margin="0 10 0 0" SelectedDateChanged="DatePicker_SelectedDateChanged" BorderBrush="#4F4E4D"></DatePicker>
@@ -52,12 +52,13 @@
             </StackPanel>
         </StackPanel>
         <StackPanel Grid.Column="1" Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 0 10 0" Background="#363534">
-            <Button Content ="Кухня"  Width="90" Height="40"  Margin="10 25 0 0" HorizontalAlignment="Left"   Foreground="#F0A444"  FontWeight="Bold" Background="#363534" BorderBrush="#363534" FontSize="20"></Button>
-            <Button Content ="Бар"  Width="120" Height="40"  Margin="10 25 0 0" HorizontalAlignment="Left" Foreground="#F0A444" Click="Button_Click" FontWeight="Bold" Background="#363534"  BorderBrush="#363534" FontSize="20"></Button>
-            <Button Content ="Расходники"  Width="130" Height="40"  Margin="10 25 0 0" HorizontalAlignment="Left" Click="Button_Click_1"  Foreground="#F0A444"  FontWeight="Bold" Background="#363534"  BorderBrush="#363534" FontSize="20"></Button>
-            <Button Content ="Особое"  Width="130" Height="40"  Margin="10 25 0 0" HorizontalAlignment="Left" Click="Button_Click_2"  Foreground="#F0A444"  FontWeight="Bold" Background="#363534"  BorderBrush="#363534" FontSize="20"></Button>
+            <Button Content ="Кухня"  Width="90" Height="40"  Margin="18 25 0 0" HorizontalAlignment="Left" Click="Button_Click"  Foreground="#F0A444"  FontWeight="Bold" Background="#363534" BorderBrush="#363534" FontSize="20"></Button>
+            <Button Content ="Бар"  Width="70" Height="40"  Margin="5 25 0 0" HorizontalAlignment="Left" Foreground="#F0A444"  FontWeight="Bold" Background="#363534"  BorderBrush="#363534" FontSize="20"></Button>
+            <Button Content ="Расходники"  Width="130" Height="40"  Margin="0 25 0 0" HorizontalAlignment="Left" Click="Button_Click_1"  Foreground="#F0A444"  FontWeight="Bold" Background="#363534"  BorderBrush="#363534" FontSize="20"></Button>
+            <Button Content ="Особое"  Width="110" Height="40"  Margin="0 25 0 0" HorizontalAlignment="Left" Click="Button_Click_2"  Foreground="#F0A444"  FontWeight="Bold" Background="#363534"  BorderBrush="#363534" FontSize="20"></Button>
+            <Button  Content ="Справка"  Width="100" Height="40"  Margin="0 25 0 0" HorizontalAlignment="Left" Click="Button_Click_3"  Foreground="#F0A444"  FontWeight="Bold" Background="#363534"  BorderBrush="#363534" FontSize="20" ></Button>
         </StackPanel>
-        <Border Grid.Column="1" Grid.Row="1" Background="White">
+        <Border Grid.Column="1" Grid.Row="1" Background="#F5E4AB">
             <Image Source="/img/hachapura.png" Width="130"/>
         </Border>
         <ListView Name="LVShow"  Margin="5 10"  Grid.Column="1" Grid.Row="2" Background="Transparent" BorderBrush="#F0A444" FontWeight="Bold" BorderThickness="4" >

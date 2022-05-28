@@ -10,5 +10,6 @@ namespace Application_Khinkalnaya
     class FrameClass
     {
         public static Frame frame;
+        public static Frame frame_manual;
     }
 }
