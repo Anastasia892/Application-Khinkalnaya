@@ -20,13 +20,16 @@ namespace Application_Khinkalnaya
     /// </summary>
     public partial class PageKitchen : Page
     {
-        List<ПоставкиДляКухни> KitchenStart = BaseClass.bd.ПоставкиДляКухни.ToList();
+        List<ПоставкиДляКухни> KitchenStart;
         List<ПоставкиДляКухни> KitchenFilter;
 
         public PageKitchen()
         {
             InitializeComponent();
-            LVShow.ItemsSource = BaseClass.bd.ПоставкиДляКухни.ToList();
+            try
+            {
+                KitchenStart = BaseClass.bd.ПоставкиДляКухни.ToList();
+                LVShow.ItemsSource = BaseClass.bd.ПоставкиДляКухни.ToList();
             CBSup.Items.Add("Все");
             List<Поставщики> sup = BaseClass.bd.Поставщики.ToList();
             for(int i = 0; i < sup.Count; i++)
@@ -48,9 +51,16 @@ namespace Application_Khinkalnaya
                 CBType.Items.Add(type[i].Название_типа);
             }
             CBType.SelectedIndex = 0;
+            }
+            catch
+            {
+                MessageBox.Show("База данных не пожключена. Попробуйте снова.");
+            }
         }
         private void Filter()
         {
+            try
+            {
             if (DPData.SelectedDate != null)
             {
                 KitchenFilter = KitchenStart.Where(x => x.Дата == DPData.SelectedDate).ToList();
@@ -95,6 +105,11 @@ namespace Application_Khinkalnaya
             }
             LVShow.ItemsSource = KitchenFilter;
             LVShow.Items.Refresh();
+            }
+            catch
+            {
+                MessageBox.Show("База данных не подключена. Попробуйте снова.");
+            }
         }
 
         private void DatePicker_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
@@ -154,6 +169,7 @@ namespace Application_Khinkalnaya
 
         private void Delete_Click(object sender, RoutedEventArgs e)
         {
+
             Button b = (Button)sender;
             int id = Convert.ToInt32(b.Uid);
             ПоставкиДляКухни del = BaseClass.bd.ПоставкиДляКухни.FirstOrDefault(x => x.ID_поставки == id);

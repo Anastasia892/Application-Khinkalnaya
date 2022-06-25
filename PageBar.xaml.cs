@@ -20,36 +20,47 @@ namespace Application_Khinkalnaya
     /// </summary>
     public partial class PageBar : Page
     {
-        List<ПоставкиДляБара> BarStart = BaseClass.bd.ПоставкиДляБара.ToList();
+        List<ПоставкиДляБара> BarStart;
         List<ПоставкиДляБара> BarFilter;
         public PageBar()
         {
             InitializeComponent();
-            LVShow.ItemsSource = BaseClass.bd.ПоставкиДляБара.ToList();
-            CBSup.Items.Add("Все");
-            List<Поставщики> sup = BaseClass.bd.Поставщики.ToList();
-            for (int i = 0; i < sup.Count; i++)
+            try
             {
-                CBSup.Items.Add(sup[i].Имя_поставщика);
+                BarStart = BaseClass.bd.ПоставкиДляБара.ToList();
+                LVShow.ItemsSource = BaseClass.bd.ПоставкиДляБара.ToList();
+                CBSup.Items.Add("Все");
+                List<Поставщики> sup = BaseClass.bd.Поставщики.ToList();
+                for (int i = 0; i < sup.Count; i++)
+                {
+                    CBSup.Items.Add(sup[i].Имя_поставщика);
+                }
+                CBSup.SelectedIndex = 0;
+                CBRespon.Items.Add("Все");
+                List<ОтветственныйЗаПоставки> resp = BaseClass.bd.ОтветственныйЗаПоставки.ToList();
+                for (int i = 0; i < resp.Count; i++)
+                {
+                    CBRespon.Items.Add(resp[i].Имя_ответственного);
+                }
+                CBRespon.SelectedIndex = 0;
+                CBType.Items.Add("Все");
+                List<ТипПоставки> type = BaseClass.bd.ТипПоставки.ToList();
+                for (int i = 0; i < type.Count; i++)
+                {
+                    CBType.Items.Add(type[i].Название_типа);
+                }
+                CBType.SelectedIndex = 0;
             }
-            CBSup.SelectedIndex = 0;
-            CBRespon.Items.Add("Все");
-            List<ОтветственныйЗаПоставки> resp = BaseClass.bd.ОтветственныйЗаПоставки.ToList();
-            for (int i = 0; i < resp.Count; i++)
+            catch
             {
-                CBRespon.Items.Add(resp[i].Имя_ответственного);
+                MessageBox.Show("База данных не пожключена. Попробуйте снова.");
             }
-            CBRespon.SelectedIndex = 0;
-            CBType.Items.Add("Все");
-            List<ТипПоставки> type = BaseClass.bd.ТипПоставки.ToList();
-            for (int i = 0; i < type.Count; i++)
-            {
-                CBType.Items.Add(type[i].Название_типа);
-            }
-            CBType.SelectedIndex = 0;
+          
         }
         private void Filter()
         {
+            try
+            {
             if (DPData.SelectedDate != null)
             {
                 BarFilter = BarStart.Where(x => x.Дата == DPData.SelectedDate).ToList();
@@ -94,6 +105,11 @@ namespace Application_Khinkalnaya
             }
             LVShow.ItemsSource = BarFilter;
             LVShow.Items.Refresh();
+            }
+            catch
+            {
+                MessageBox.Show("База данных не подключена. Попробуйте снова.");
+            }
         }
 
         private void DatePicker_SelectedDateChanged(object sender, SelectionChangedEventArgs e)

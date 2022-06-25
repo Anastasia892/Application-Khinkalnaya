@@ -23,14 +23,21 @@ namespace Application_Khinkalnaya
         public MainWindow()
         {
             InitializeComponent();
-            BaseClass.bd = new BD();
-            CBSup.ItemsSource = BaseClass.bd.Поставщики.ToList();
-            CBSup.SelectedValuePath = "ID_поставки";
-            CBSup.DisplayMemberPath = "Имя_поставщика";
-            CBRespons.ItemsSource = BaseClass.bd.ОтветственныйЗаПоставки.ToList();
-            CBRespons.SelectedValuePath = "ID_работника";
-            CBRespons.DisplayMemberPath = "Имя_ответственного";
-        }
+            try
+            {
+                BaseClass.bd = new BD();
+                CBSup.ItemsSource = BaseClass.bd.Поставщики.ToList();
+                CBSup.SelectedValuePath = "ID_поставки";
+                CBSup.DisplayMemberPath = "Имя_поставщика";
+                CBRespons.ItemsSource = BaseClass.bd.ОтветственныйЗаПоставки.ToList();
+                CBRespons.SelectedValuePath = "ID_работника";
+                CBRespons.DisplayMemberPath = "Имя_ответственного";
+            }
+            catch
+            {
+                MessageBox.Show("База данных не пожключена. Попробуйте снова.");
+            }
+        }   
 
         private void View_Click(object sender, RoutedEventArgs e)
         {
@@ -58,8 +65,8 @@ namespace Application_Khinkalnaya
             switch (CBTabl.SelectedIndex)
             {
                 case 0:
-                    //try
-                    //{
+                    try
+                    {
                         Kitchen.Тип_поставки = indpost;
                         Kitchen.Поставщик = indsup;
                         Kitchen.Описание = TBDescription.Text;
@@ -68,11 +75,11 @@ namespace Application_Khinkalnaya
                         BaseClass.bd.ПоставкиДляКухни.Add(Kitchen);
                         BaseClass.bd.SaveChanges();
                         MessageBox.Show("Поставка для кухни записана!");
-                    //}
-                    //catch
-                    //{
-                        //MessageBox.Show("Поставка для кухни не записана!");
-                    //}
+                    }
+                    catch
+                    {
+                        MessageBox.Show("Поставка для кухни не записана!");
+                    }
                     break;
                 case 1:
                     try

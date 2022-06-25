@@ -20,12 +20,15 @@ namespace Application_Khinkalnaya
     /// </summary>
     public partial class PageStuff : Page
     {
-        List<РасходнаяУтварь> StuffStart = BaseClass.bd.РасходнаяУтварь.ToList();
+        List<РасходнаяУтварь> StuffStart;
         List<РасходнаяУтварь> StuffFilter;
         public PageStuff()
         {
             InitializeComponent();
-            LVShow.ItemsSource = BaseClass.bd.РасходнаяУтварь.ToList();
+            try
+            {
+                StuffStart = BaseClass.bd.РасходнаяУтварь.ToList();
+                LVShow.ItemsSource = BaseClass.bd.РасходнаяУтварь.ToList();
             CBSup.Items.Add("Все");
             List<Поставщики> sup = BaseClass.bd.Поставщики.ToList();
             for (int i = 0; i < sup.Count; i++)
@@ -47,9 +50,17 @@ namespace Application_Khinkalnaya
                 CBType.Items.Add(type[i].Название_типа);
             }
             CBType.SelectedIndex = 0;
+            }
+            catch
+            {
+                MessageBox.Show("База данных не пожключена. Попробуйте снова.");
+            }
         }
         private void Filter()
         {
+            try
+            {
+
             if (DPData.SelectedDate != null)
             {
                 StuffFilter = StuffStart.Where(x => x.Дата == DPData.SelectedDate).ToList();
@@ -94,6 +105,11 @@ namespace Application_Khinkalnaya
             }
             LVShow.ItemsSource = StuffFilter;
             LVShow.Items.Refresh();
+            }
+            catch
+            {
+                MessageBox.Show("База данных не подключена. Попробуйте снова.");
+            }
         }
 
         private void DatePicker_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
